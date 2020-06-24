@@ -1,15 +1,6 @@
 function buildPlot (sampleId) {
     d3.json("samples.json").then(sampleData => {
 
-
-        // var metaSelector = d3.select(".panel-body");
-        // var metaD = sampleData.metadata
-        // metaSelector
-        // .append("th")
-        // .text(sampleData.metadata.id)
-        // .append("tr")
-        // .html(`<td>${metaD.id}</td><td>${metaD.ethnicity}</td><td>${metaD.gender}</td><td>${metaD.age}</td><td>${metaD.location}</td><td>${metaD.bbtype}</td><td>${metaD.wfreq}</td>`)
-
         console.log(sampleData)
 
         var samples = sampleData.samples
@@ -29,13 +20,6 @@ function buildPlot (sampleId) {
         console.log(sample_values)
         console.log(otuLabels)
         console.log(otuAxisLabel)
-
-        // var trace1 = {
-        //     x: sample_values,
-        //     y: otuAxisLabel,
-        //     type: 'bar',
-        //     orientation: 'h'
-        // };
 
         var data = [
             {
@@ -87,13 +71,20 @@ function buildMetadata(sampleid) {
     console.log(sampleid)
     d3.json("samples.json").then(sampleData => {
 
+    var meta = sampleData.metadata
+    console.log(meta)
+
+    var metaChar = meta.filter(meta => meta.id == sampleid)[0]
+        console.log(metaChar)
+
     var metaSelector = d3.select(".panel-body");
+    metaSelector.html("")
     // need to find a way to change the index value when selecting a different subject ID
     // need to find a way to remove the old data when selecting a different subject ID from dropdown
-    var metaD = sampleData.metadata[0]
+    // var metaD = sampleData.metadata[0]
     metaSelector
         .append("ul")
-        .html(`<li>${metaD.id}</li><li>${metaD.ethnicity}</li><li>${metaD.gender}</li><li>${metaD.age}</li><li>${metaD.location}</li><li>${metaD.bbtype}</li><li>${metaD.wfreq}</li>`)
+        .html(`<li>${metaChar.id}</li><li>${metaChar.ethnicity}</li><li>${metaChar.gender}</li><li>${metaChar.age}</li><li>${metaChar.location}</li><li>${metaChar.bbtype}</li><li>${metaChar.wfreq}</li>`)
     })
     }
   function init() {
